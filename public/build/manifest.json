@@ -1,0 +1,66 @@
+{
+  "_popper-Bt1yUB8z.js": {
+    "file": "assets/popper-Bt1yUB8z.js",
+    "name": "popper"
+  },
+  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf": {
+    "file": "assets/fa-brands-400-D1LuMI3I.ttf",
+    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf"
+  },
+  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2": {
+    "file": "assets/fa-brands-400-D_cYUPeE.woff2",
+    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2"
+  },
+  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf": {
+    "file": "assets/fa-regular-400-DZaxPHgR.ttf",
+    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf"
+  },
+  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2": {
+    "file": "assets/fa-regular-400-BjRzuEpd.woff2",
+    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2"
+  },
+  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf": {
+    "file": "assets/fa-solid-900-D0aA9rwL.ttf",
+    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf"
+  },
+  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2": {
+    "file": "assets/fa-solid-900-CTAAxXor.woff2",
+    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2"
+  },
+  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.ttf": {
+    "file": "assets/fa-v4compatibility-CCth-dXg.ttf",
+    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.ttf"
+  },
+  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.woff2": {
+    "file": "assets/fa-v4compatibility-C9RhG_FT.woff2",
+    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.woff2"
+  },
+  "resources/css/app-frontend.css": {
+    "file": "assets/app-frontend-w5HQuSGs.css",
+    "src": "resources/css/app-frontend.css",
+    "isEntry": true
+  },
+  "resources/js/app-backend.js": {
+    "file": "assets/app-backend-DEvUHY1U.js",
+    "name": "app-backend",
+    "src": "resources/js/app-backend.js",
+    "isEntry": true,
+    "imports": [
+      "_popper-Bt1yUB8z.js"
+    ]
+  },
+  "resources/js/app-frontend.js": {
+    "file": "assets/app-frontend-B39E8JXZ.js",
+    "name": "app-frontend",
+    "src": "resources/js/app-frontend.js",
+    "isEntry": true,
+    "imports": [
+      "_popper-Bt1yUB8z.js"
+    ]
+  },
+  "resources/sass/app-backend.scss": {
+    "file": "assets/app-backend-DPPVP33d.css",
+    "src": "resources/sass/app-backend.scss",
+    "isEntry": true
+  }
+}
