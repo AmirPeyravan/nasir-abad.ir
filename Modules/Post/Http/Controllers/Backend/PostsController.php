@@ -34,6 +34,26 @@ class PostsController extends BackendBaseController
         $this->module_model = "Modules\Post\Models\Post";
     }
 
+    // public function create()
+    // {
+    //     $module_title = $this->module_title;
+    //     $module_name = $this->module_name;
+    //     $module_path = $this->module_path;
+    //     $module_icon = $this->module_icon;
+
+    //     $categories = \Modules\Category\Models\Category::pluck('name', 'id')->toArray();
+    //     $tags = \Modules\Tag\Models\Tag::pluck('name', 'id')->toArray();
+
+    //     return view("{$module_path}.create", compact(
+    //         'module_title',
+    //         'module_name',
+    //         'module_icon',
+    //         'categories',
+    //         'tags'
+    //     ));
+    // }
+
+
     /**
      * Store a new resource in the database.
      *
@@ -79,9 +99,9 @@ class PostsController extends BackendBaseController
         $$module_name_singular = $module_model::create($data);
         $$module_name_singular->tags()->attach($request->input('tags_list'));
 
-        flash("New '".Str::singular($module_title)."' Added")->success()->important();
+        flash("New '" . Str::singular($module_title) . "' Added")->success()->important();
 
-        logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
+        logUserAccess($module_title . ' ' . $module_action . ' | Id: ' . $$module_name_singular->id);
 
         return redirect("admin/{$module_name}");
     }
@@ -141,9 +161,9 @@ class PostsController extends BackendBaseController
         }
         $$module_name_singular->tags()->sync($tags_list);
 
-        flash(Str::singular($module_title)."' Updated Successfully")->success()->important();
+        flash(Str::singular($module_title) . "' Updated Successfully")->success()->important();
 
-        logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
+        logUserAccess($module_title . ' ' . $module_action . ' | Id: ' . $$module_name_singular->id);
 
         return redirect()->route("backend.{$module_name}.show", $$module_name_singular->id);
     }

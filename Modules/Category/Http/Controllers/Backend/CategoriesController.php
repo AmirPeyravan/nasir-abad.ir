@@ -29,6 +29,19 @@ class CategoriesController extends BackendBaseController
         $this->module_model = "Modules\Category\Models\Category";
     }
 
+    public function index_list(Request $request)
+    {
+        $search = $request->get('q');
+
+        $categories = \Modules\Category\Models\Category::query()
+            ->where('name', 'like', "%{$search}%")
+            ->select('id', 'name as text')
+            ->get();
+
+        return response()->json($categories);
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -46,8 +59,8 @@ class CategoriesController extends BackendBaseController
         $module_action = 'Store';
 
         $validated_request = $request->validate([
-            'name' => 'required|max:191|unique:'.$module_model.',name',
-            'slug' => 'nullable|max:191|unique:'.$module_model.',slug',
+            'name' => 'required|max:191|unique:' . $module_model . ',name',
+            'slug' => 'nullable|max:191|unique:' . $module_model . ',slug',
             'group_name' => 'nullable|max:191',
             'description' => 'nullable',
             'meta_title' => 'nullable|max:191',
@@ -65,9 +78,9 @@ class CategoriesController extends BackendBaseController
             $$module_name_singular->save();
         }
 
-        flash("New '".Str::singular($module_title)."' Added")->success()->important();
+        flash("New '" . Str::singular($module_title) . "' Added")->success()->important();
 
-        logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
+        logUserAccess($module_title . ' ' . $module_action . ' | Id: ' . $$module_name_singular->id);
 
         return redirect("admin/{$module_name}");
     }
@@ -93,7 +106,7 @@ class CategoriesController extends BackendBaseController
 
         $posts = $$module_name_singular->posts()->latest()->paginate();
 
-        logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
+        logUserAccess($module_title . ' ' . $module_action . ' | Id: ' . $$module_name_singular->id);
 
         return view(
             "{$module_path}.{$module_name}.show",
@@ -119,8 +132,8 @@ class CategoriesController extends BackendBaseController
         $module_action = 'Update';
 
         $validated_request = $request->validate([
-            'name' => 'required|max:191|unique:'.$module_model.',name,'.$id,
-            'slug' => 'nullable|max:191|unique:'.$module_model.',slug,'.$id,
+            'name' => 'required|max:191|unique:' . $module_model . ',name,' . $id,
+            'slug' => 'nullable|max:191|unique:' . $module_model . ',slug,' . $id,
             'group_name' => 'nullable|max:191',
             'description' => 'nullable',
             'meta_title' => 'nullable|max:191',
@@ -155,9 +168,9 @@ class CategoriesController extends BackendBaseController
             }
         }
 
-        flash(Str::singular($module_title)."' Updated Successfully")->success()->important();
+        flash(Str::singular($module_title) . "' Updated Successfully")->success()->important();
 
-        logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
+        logUserAccess($module_title . ' ' . $module_action . ' | Id: ' . $$module_name_singular->id);
 
         return redirect()->route("backend.{$module_name}.show", $$module_name_singular->id);
     }

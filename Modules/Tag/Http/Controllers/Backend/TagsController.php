@@ -29,6 +29,27 @@ class TagsController extends BackendBaseController
         $this->module_model = "Modules\Tag\Models\Tag";
     }
 
+    public function index_list(Request $request)
+    {
+        $query = \Modules\Tag\Models\Tag::query();
+
+        if ($request->has('q')) {
+            $query->where('name', 'like', '%' . $request->q . '%');
+        }
+
+        $tags = $query->limit(10)->get();
+
+        $results = $tags->map(function ($tag) {
+            return [
+                'id' => $tag->id,
+                'text' => $tag->name,
+            ];
+        });
+
+        return response()->json($results);
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -46,8 +67,8 @@ class TagsController extends BackendBaseController
         $module_action = 'Store';
 
         $validated_request = $request->validate([
-            'name' => 'required|max:191|unique:'.$module_model.',name',
-            'slug' => 'nullable|max:191|unique:'.$module_model.',slug',
+            'name' => 'required|max:191|unique:' . $module_model . ',name',
+            'slug' => 'nullable|max:191|unique:' . $module_model . ',slug',
             'group_name' => 'nullable|max:191',
             'description' => 'nullable|max:191',
             'meta_title' => 'nullable|max:191',
@@ -65,9 +86,9 @@ class TagsController extends BackendBaseController
             $$module_name_singular->save();
         }
 
-        flash("New '".Str::singular($module_title)."' Added")->success()->important();
+        flash("New '" . Str::singular($module_title) . "' Added")->success()->important();
 
-        logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
+        logUserAccess($module_title . ' ' . $module_action . ' | Id: ' . $$module_name_singular->id);
 
         return redirect("admin/{$module_name}");
     }
@@ -93,7 +114,7 @@ class TagsController extends BackendBaseController
 
         $posts = $$module_name_singular->posts()->latest()->paginate();
 
-        logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
+        logUserAccess($module_title . ' ' . $module_action . ' | Id: ' . $$module_name_singular->id);
 
         return view(
             "{$module_path}.{$module_name}.show",
@@ -119,8 +140,8 @@ class TagsController extends BackendBaseController
         $module_action = 'Update';
 
         $validated_request = $request->validate([
-            'name' => 'required|max:191|unique:'.$module_model.',name,'.$id,
-            'slug' => 'nullable|max:191|unique:'.$module_model.',slug,'.$id,
+            'name' => 'required|max:191|unique:' . $module_model . ',name,' . $id,
+            'slug' => 'nullable|max:191|unique:' . $module_model . ',slug,' . $id,
             'group_name' => 'nullable|max:191',
             'description' => 'nullable|max:191',
             'meta_title' => 'nullable|max:191',
@@ -155,9 +176,9 @@ class TagsController extends BackendBaseController
             }
         }
 
-        flash(Str::singular($module_title)."' Updated Successfully")->success()->important();
+        flash(Str::singular($module_title) . "' Updated Successfully")->success()->important();
 
-        logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
+        logUserAccess($module_title . ' ' . $module_action . ' | Id: ' . $$module_name_singular->id);
 
         return redirect()->route("backend.{$module_name}.show", $$module_name_singular->id);
     }
